@@ -2,6 +2,8 @@ module PushVectors
 
 export PushVector, finish!
 
+export NestedPushVector, NPV, extend!, freenext!
+
 mutable struct PushVector{T, V <: AbstractVector{T}} <: AbstractVector{T}
     "Vector used for storage."
     parent::V
@@ -79,5 +81,7 @@ Shrink the buffer `v` to its current content and return that vector.
     Consequences are undefined if you modify `v` after this.
 """
 finish!(v::PushVector) = resize!(v.parent, v.len)
+
+include("NestedPushVectors.jl")
 
 end # module
